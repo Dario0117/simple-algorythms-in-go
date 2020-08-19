@@ -1,19 +1,19 @@
-package main
+package algorythms
 
 import (
-	"bufio"
 	"errors"
 	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/Dario0117/simple-algorythms-in-go/localutils"
 )
 
-func main() {
-	args := os.Args[1:]
+// RunCalculator ...
+func RunCalculator(args []string) {
 	var result float64
 	for {
 		var selectedOption uint8
@@ -48,34 +48,20 @@ func main() {
 	}
 }
 
-func printLineInsideMenu(text string) {
-	fmt.Printf("# %-51s #\n", text)
-}
-
-func prompt(message string) string {
-	var input string
-	fmt.Printf(message + "> ")
-	scanner := bufio.NewScanner(os.Stdin)
-	if scanner.Scan() {
-		input = scanner.Text()
-	}
-	return input
-}
-
 func printMainMenu() uint8 {
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
 	fmt.Println("# Welcome to this simple but functional calculator 🤡 #")
-	printLineInsideMenu(strings.Repeat("-", 51))
-	printLineInsideMenu("What you wanna do?")
-	printLineInsideMenu("1 - For add")
-	printLineInsideMenu("2 - For subtract")
-	printLineInsideMenu("3 - For multiply")
-	printLineInsideMenu("4 - For divide")
-	printLineInsideMenu("5 - For Arithmetic expression")
-	printLineInsideMenu("6 - Exit")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintLineInsideMenu(strings.Repeat("-", 51))
+	localutils.PrintLineInsideMenu("What you wanna do?")
+	localutils.PrintLineInsideMenu("1 - For add")
+	localutils.PrintLineInsideMenu("2 - For subtract")
+	localutils.PrintLineInsideMenu("3 - For multiply")
+	localutils.PrintLineInsideMenu("4 - For divide")
+	localutils.PrintLineInsideMenu("5 - For Arithmetic expression")
+	localutils.PrintLineInsideMenu("6 - Exit")
+	localutils.PrintHeadFootPattern()
 	for {
-		input := prompt("")
+		input := localutils.Prompt("")
 		if selectedOption, err := strconv.ParseInt(input, 10, 8); err == nil && selectedOption > 0 && selectedOption < 7 {
 			return uint8(selectedOption)
 		}
@@ -85,7 +71,7 @@ func printMainMenu() uint8 {
 
 func readValidNumber() float64 {
 	for {
-		input := prompt("Please enter a number ")
+		input := localutils.Prompt("Please enter a number ")
 		if number, err := strconv.ParseFloat(input, 10); err == nil {
 			return number
 		}
@@ -94,36 +80,36 @@ func readValidNumber() float64 {
 }
 
 func printAddMenu() float64 {
-	fmt.Println(strings.Repeat("#", 55))
-	printLineInsideMenu(strings.Repeat(" ", 12) + ">>>>> Add two numbers <<<<<")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
+	localutils.PrintLineInsideMenu(strings.Repeat(" ", 12) + ">>>>> Add two numbers <<<<<")
+	localutils.PrintHeadFootPattern()
 	input1 := readValidNumber()
 	input2 := readValidNumber()
 	return input1 + input2
 }
 
 func printSubtractMenu() float64 {
-	fmt.Println(strings.Repeat("#", 55))
-	printLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Subtract two numbers <<<<<")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
+	localutils.PrintLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Subtract two numbers <<<<<")
+	localutils.PrintHeadFootPattern()
 	input1 := readValidNumber()
 	input2 := readValidNumber()
 	return input1 - input2
 }
 
 func printMiltiplyMenu() float64 {
-	fmt.Println(strings.Repeat("#", 55))
-	printLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Miltiply two numbers <<<<<")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
+	localutils.PrintLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Miltiply two numbers <<<<<")
+	localutils.PrintHeadFootPattern()
 	input1 := readValidNumber()
 	input2 := readValidNumber()
 	return input1 * input2
 }
 
 func printDivideMenu() float64 {
-	fmt.Println(strings.Repeat("#", 55))
-	printLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Divide two numbers <<<<<")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
+	localutils.PrintLineInsideMenu(strings.Repeat(" ", 9) + ">>>>> Divide two numbers <<<<<")
+	localutils.PrintHeadFootPattern()
 	input1 := readValidNumber()
 	var input2 float64
 	for input2 == 0 {
@@ -136,11 +122,11 @@ func printDivideMenu() float64 {
 }
 
 func printArithmeticExpressionMenu() float64 {
-	fmt.Println(strings.Repeat("#", 55))
-	printLineInsideMenu(strings.Repeat(" ", 11) + ">>>>> Arithmetic expression <<<<<")
-	fmt.Println(strings.Repeat("#", 55))
+	localutils.PrintHeadFootPattern()
+	localutils.PrintLineInsideMenu(strings.Repeat(" ", 11) + ">>>>> Arithmetic expression <<<<<")
+	localutils.PrintHeadFootPattern()
 	for {
-		input1 := prompt("Insert a expression ")
+		input1 := localutils.Prompt("Insert a expression ")
 		tr, err := parser.ParseExpr(input1)
 
 		// Print AST
