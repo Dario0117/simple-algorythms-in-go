@@ -43,4 +43,4 @@ Note: Only IVXLCDM characters are valid
 - For menu version run : `go run main.go rmn`
 - For cli version run: `go run main.go rmn [Roman numeral]`
 
-**Note: This converter doesn't really wokrs 😂 (i need to check all the rules for the convertion so...), i just pushed this code because of the setup i made.**
+**Note: This converter doesn't really works 😂 (I need to check all the rules for the convertion so...), i just pushed this code because of the setup i made.**
